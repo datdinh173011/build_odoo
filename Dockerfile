@@ -1,7 +1,7 @@
 # ********** BASE **********
 FROM odoo:16 AS base
 WORKDIR /etc/odoo
-COPY ./DATN_ODOO_2 /mnt/extra-addons
+COPY ./DATN_ODOO /mnt/extra-addons
 
 # ********** DEVELOPER **********
 FROM base AS dev

@@ -19,7 +19,7 @@ services:
     volumes:
       - odoo-data:/var/lib/odoo
       - .:/mnt:cached
-      - ./DATN_ODOO_2:/mnt/extra-addons
+      - ./DATN_ODOO:/mnt/extra-addons
 
   db:
     image: postgres:15
