@@ -1,0 +1,38 @@
+version: '3.1'
+
+services:
+  web:
+    build:
+      context: ./
+      target: dev
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    expose:
+      - 8069
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+      - CONFIG=/etc/odoo/odoo.conf 
+    volumes:
+      - odoo-data:/var/lib/odoo
+      - .:/mnt:cached
+      - ./DATN_ODOO_2:/mnt/extra-addons
+
+  db:
+    image: postgres:15
+    user: root
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+      - PGDATA=/var/lib/postgresql/data
+    restart: always
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  odoo-data:
+  postgres-data:
