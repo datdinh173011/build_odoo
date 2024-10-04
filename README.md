@@ -8,6 +8,13 @@
 
     Now the server is running on: http://localhost:8069
 
+2. DumpDB example:
+    ```bash
+    $ docker cp backup.dump build_odoo-db-1:/backup.dump
+    docker exec -i build_odoo-db-1 pg_restore --clean -U odoo -d postgres /backup.dump 
+    ```
+
+
 3. Database Migration Issues:
 
     ```bash
