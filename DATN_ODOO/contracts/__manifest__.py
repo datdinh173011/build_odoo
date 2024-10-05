@@ -9,7 +9,7 @@
     'description': """
         This is a module used to sign contracts between businesses and employees
     """,
-    'depends': ['hr', 'hr_employee'],
+    'depends': ['hr'],
     'data': [
         'security/ir.model.access.csv',
         'views/contract_enterprise_views.xml',

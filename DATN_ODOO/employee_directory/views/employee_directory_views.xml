@@ -61,7 +61,7 @@
         </record>
 
 
-        <menuitem id="employee_directory_menu" name="Employees" />
-        <menuitem id="employee_directory_menu_1" name="Employees" parent="employee_directory_menu" action="employee_directory_action"/>
+        <menuitem id="employee_directory_menu" name="Employees Director" />
+        <menuitem id="employee_directory_menu_1" name="Employees Director" parent="employee_directory_menu" action="employee_directory_action"/>
     </data>
 </odoo>

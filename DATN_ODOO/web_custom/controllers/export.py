@@ -9,13 +9,17 @@ import json
 import pandas as pd
 import os
 from odoo.http import request, _logger
+from dotenv import load_dotenv
+load_dotenv()
+aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
 
+aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
+bucket_s3 = os.getenv('BUCKET')
 s3 = boto3.client('s3',
-                  aws_access_key_id='AKIA47CRY4E7VBYCWP7L',
-                  aws_secret_access_key='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',
+                  aws_access_key_id=aws_access_key_id,
+                  aws_secret_access_key=aws_secret_access_key,
                   region_name='ap-southeast-2',
                   config=Config(signature_version='s3v4'))
-
 
 def upload_file_to_s3(file_name, bucket, object_name=None):
     if object_name is None:
@@ -42,6 +46,8 @@ class CustomExcelExport(ExcelExport):
 
     @http.route('/web/export/xlsx', type='http', auth="user")
     def index(self, data):
+        print(aws_access_key_id)
+        print(bucket_s3)
         data_dict = json.loads(data)
 
         model_name = data_dict.get('model')
@@ -59,9 +65,8 @@ class CustomExcelExport(ExcelExport):
         df.to_csv(file_path, index=False)
 
         # Upload file lên S3
-        bucket_name = 'my-bucket-tam-test'
+        bucket_name = bucket_s3
         response = upload_file_to_s3(file_path, bucket_name, file_name)
-        print('response', response)
         try:
             return super(CustomExcelExport, self).base(data)
         except Exception as exc:

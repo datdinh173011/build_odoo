@@ -13,10 +13,11 @@ class HrEmployee(models.Model):
             ('terminated', 'Terminated'),
         ], string='Status', default='draft', readonly=True
     )
-    # work_experiences_ids = fields.One2many('work.experiences', 'employee_id', string='Work Experiences')
-    # role_name = fields.Char(related="work_experiences_ids.role_id.name")
-    # level_name = fields.Char(related="work_experiences_ids.level_name")
-    # job_name = fields.Char(related="work_experiences_ids.job_name")
+
+    level_id = fields.Many2one('level', string='Level')
+    level_name = fields.Char(related='level_id.name', string='Level Name', store=True, related_sudo=False, readonly=False)
+    department_name = fields.Char(related='department_id.name', string='Department Name', store=True, related_sudo=False, readonly=False)
+    job_name = fields.Char(related='job_id.name', string='Job Name', store=True, related_sudo=False, readonly=False)
 
     def action_submit(self):
         self.status = "waiting_approve"
