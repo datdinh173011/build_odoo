@@ -31,7 +31,7 @@ class UsersController(http.Controller):
             'Access-Control-Allow-Headers': 'Content-Type, Authorization'
         }
 
-        db = 'odoo_study'
+        db = 'postgres'
         login = kwargs.get('login')
         password = kwargs.get('password')
 
